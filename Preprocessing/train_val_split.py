@@ -115,8 +115,8 @@ for model in models:
             height, width, channels = img.shape
             row[3] = np.maximum(row[3],0)
             row[4] = np.maximum(row[4],0)
-            row[5] = np.minimum(row[5],width)
-            row[6] = np.maximum(row[6],height)
+            row[5] = np.minimum(row[5],row[3] + width)
+            row[6] = np.maximum(row[6],row[4] + height)
             # Traning set
             if i <= cut:
                 if model == 'detectnet':
