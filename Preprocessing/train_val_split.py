@@ -164,22 +164,21 @@ for model in models:
                 
             #validation set    
             else:
-                label_file = os.path.join(validation_labels + row[1] +'_' + row[2].split('.')[0] + '.txt')
-                image_file = os.path.join(validation_images + row[1] +'_' + row[2])
                 if model == 'detectnet':
+                    label_file = os.path.join(validation_labels + row[1] +'_' + row[2].split('.')[0] + '.txt')
+                    image_file = os.path.join(validation_images + row[1] +'_' + row[2])
                     full = ['fish',0.0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0]
                     full[4:8] = row[3:7]
-                    row = full   
-            
-                if not os.path.isfile(image_file):
-                    shutil.copy2(data['filename'][i],image_file)
-                
-                mode = 'a+' if os.path.isfile(label_file) else 'w+'
-                thefile = open(label_file, mode)
-                for i in row:
-                  thefile.write("%s " % i)
-                thefile.write("\n")
-                thefile.close()
+                    row = full
+                    
+                    mode = 'a+' if os.path.isfile(label_file) else 'w+'
+                    thefile = open(label_file, mode)
+                    for i in row:
+                      thefile.write("%s " % i)
+                    thefile.write("\n")
+                    thefile.close()
+                    if not os.path.isfile(image_file):
+                        shutil.copy2(data['filename'][i],image_file)
 
                     
                 if model == 'ssd':
