@@ -116,7 +116,7 @@ for model in models:
             row[3] = np.maximum(row[3],0)
             row[4] = np.maximum(row[4],0)
             row[5] = np.minimum(row[5],row[3] + width)
-            row[6] = np.maximum(row[6],row[4] + height)
+            row[6] = np.minimum(row[6],row[4] + height)
             # Traning set
             if i <= cut:
                 if model == 'detectnet':
