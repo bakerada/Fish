@@ -67,7 +67,7 @@ if not os.path.isdir(validation_labels_ssd):
 
 
 jsons = glob.glob('*.json')
-models = ['detectnet','ssd']
+models = ['ssd']
 print "Parsing data for %s" % models
 
 
@@ -185,6 +185,10 @@ for model in models:
                     # SSD requires key value pairs in a file
                     label_file = os.path.join(validation_labels_ssd + row[1] +'_' + row[2].split('.')[0] + '_ssd.txt')
                     image_file = os.path.join(validation_images_ssd + row[1] +'_' + row[2])
+
+                    if not os.path.isfile(image_file):
+                        shutil.copy2(data['filename'][i],image_file)
+
                     indices = [7,3,4,5,6]
                     row[7]=1
                     mode = 'a+' if os.path.isfile(label_file) else 'w+'
@@ -193,8 +197,7 @@ for model in models:
                       thefile.write("%s " % row[i])
                     thefile.write("\n")
                     thefile.close()
-                    if not os.path.isfile(image_file):
-                        shutil.copy2(data['filename'][i],image_file)
+
                         
                     ssd_labels = 'validation_ssd/labels/'
                     ssd_labels_2 = os.path.join(ssd_labels + row[1] +'_' + row[2].split('.')[0] + '_ssd.txt')
