@@ -27,6 +27,7 @@ def crop_image(img,bbox,output_dir):
 	image = io.imread(img)
 
 	if isinstance(bbox,np.ndarray):
+		filename = '{}_'.format(i) + filename
 		xmin, ymin, xmax, ymax = np.maximum(bbox[0],0).astype(int),np.maximum(bbox[1],0).astype(int),bbox[2].astype(int),bbox[3].astype(int)
 		cropped = image[ymin:ymax,xmin:xmax]
 		save_file = os.path.join(class_directory,filename)
