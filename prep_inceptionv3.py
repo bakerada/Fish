@@ -34,10 +34,10 @@ def crop_image(img,bbox,output_dir):
 
 	else:	
 		for i,box in enumerate(bbox):
-			filename = '{}_'.format(i) + filename
+			filename_x = '{}_'.format(i) + filename
 			xmin, ymin, xmax, ymax = np.maximum(box[0],0).astype(int),np.maximum(box[1],0).astype(int),box[2].astype(int),box[3].astype(int)
 			cropped = image[ymin:ymax,xmin:xmax]
-			save_file = os.path.join(class_directory,filename)
+			save_file = os.path.join(class_directory,filename_x)
 			io.imsave(save_file,cropped)
 
 if __name__ == "__main__":
